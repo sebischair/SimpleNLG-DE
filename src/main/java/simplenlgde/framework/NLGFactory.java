@@ -1017,7 +1017,6 @@ public class NLGFactory {
 	 * Creates a new enumerated list element with no components.
 	 *
 	 * @return a <code>DocumentElement</code> representing the list.
-	 * @author Rodrigo de Oliveira - Data2Text Ltd
 	 */
 	public DocumentElement createEnumeratedList() {
 		return new DocumentElement(DocumentCategory.ENUMERATED_LIST, null);
@@ -1031,7 +1030,6 @@ public class NLGFactory {
 	 *            a <code>List</code> of <code>NLGElement</code>s that form the
 	 *            components of this element.
 	 * @return a <code>DocumentElement</code> representing the list.
-	 * @author Rodrigo de Oliveira - Data2Text Ltd
 	 */
 	public DocumentElement createEnumeratedList(List<DocumentElement> textComponents) {
 		DocumentElement list = new DocumentElement(DocumentCategory.ENUMERATED_LIST, null);
@@ -1047,7 +1045,6 @@ public class NLGFactory {
 	 *            an <code>NLGElement</code> that becomes the first component of
 	 *            this document element.
 	 * @return a <code>DocumentElement</code> representing the section.
-	 * @author Rodrigo de Oliveira - Data2Text Ltd
 	 */
 	public DocumentElement createEnumeratedList(NLGElement component) {
 		DocumentElement list = new DocumentElement(DocumentCategory.ENUMERATED_LIST, null);

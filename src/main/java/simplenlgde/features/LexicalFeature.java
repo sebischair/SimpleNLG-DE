@@ -169,7 +169,7 @@ public abstract class LexicalFeature {
      * </tr>
      * <tr>
      * <td><b>Used by</b></td>
-     * <td>{@link simplenlgde.german.MorphologyProcessor}.</td>
+     * <td>{@link simplenlgde.morphology.MorphologyProcessor}.</td>
      * </tr>
      * <tr>
      * <td><b>Applies to</b></td>
@@ -238,7 +238,7 @@ public abstract class LexicalFeature {
      * </tr>
      * <tr>
      * <td><b>Used by</b></td>
-     * <td>{@link simplenlgde.german.MorphologyProcessor}</td>
+     * <td>{@link simplenlgde.morphology.MorphologyProcessor}</td>
      * </tr>
      * <tr>
      * <td><b>Applies to</b></td>

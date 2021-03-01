@@ -110,7 +110,7 @@ public class XMLLexicon extends Lexicon {
                 createLexicon(defaultLexicon.toURI());
             } else {
                 createLexicon(this.getClass().getResource(
-                        "/simplenlgde/lexicon/wiktionary-lexicon.xml").toURI());
+                        "/main/resources/wiktionary-lexicon.xml").toURI());
             }
 
         } catch (URISyntaxException ex) {
