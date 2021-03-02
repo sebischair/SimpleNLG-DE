@@ -104,13 +104,13 @@ public class XMLLexicon extends Lexicon {
     public XMLLexicon() {
         try {
 
-            URL defaultLexicon = this.getClass().getClassLoader().getResource("wiktionary-lexicon.xml");
+            URL defaultLexicon = this.getClass().getClassLoader().getResource("MucLex.xml");
 
             if (null != defaultLexicon) {
                 createLexicon(defaultLexicon.toURI());
             } else {
                 createLexicon(this.getClass().getResource(
-                        "/main/resources/wiktionary-lexicon.xml").toURI());
+                        "/main/resources/MucLex.xml").toURI());
             }
 
         } catch (URISyntaxException ex) {
