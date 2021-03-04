@@ -33,7 +33,7 @@ public class QuestionTest {
         this.realiser = realiser;
     }
 
-    public void yesNoTest(){
+    public void questionTest1(){
         //statement
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("Klaus");
@@ -60,6 +60,20 @@ public class QuestionTest {
         output = realiser.realiseSentence(sentence);
         System.out.println(output);
         Assertions.assertEquals("Verliert Klaus das Spiel?", output);
+
+        //question how
+        sentence = nlgFactory.createClause();
+        subject = nlgFactory.createNounPhrase("Klaus");
+        sentence.setSubject(subject);
+        verb = nlgFactory.createVerbPhrase("verlieren");
+        sentence.setVerb(verb);
+        object = nlgFactory.createNounPhrase("das Spiel");
+        sentence.setObject(object);
+
+        sentence.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.HOW);
+        output = realiser.realiseSentence(sentence);
+        System.out.println(output);
+        Assertions.assertEquals("Wie verliert Klaus das Spiel?", output);
 
         //question subject
         sentence = nlgFactory.createClause();
@@ -90,7 +104,7 @@ public class QuestionTest {
         Assertions.assertEquals("Was verliert Klaus?", output);
     }
 
-    public void yesNoTest2(){
+    public void questionTest2(){
         //statement
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("das Auto");
@@ -116,6 +130,19 @@ public class QuestionTest {
         System.out.println(output);
         Assertions.assertEquals("Ist das Auto rot?", output);
 
+        //question how
+        sentence = nlgFactory.createClause();
+        subject = nlgFactory.createNounPhrase("das Auto");
+        sentence.setSubject(subject);
+        verb = nlgFactory.createVerbPhrase("sein");
+        verb.addModifier("rot");
+        sentence.setVerb(verb);
+
+        sentence.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.HOW);
+        output = realiser.realiseSentence(sentence);
+        System.out.println(output);
+        Assertions.assertEquals("Wie ist das Auto rot?", output);
+
         //question subject
         sentence = nlgFactory.createClause();
         subject = nlgFactory.createNounPhrase("das Auto");
@@ -130,7 +157,7 @@ public class QuestionTest {
         Assertions.assertEquals("Was ist rot?", output);
     }
 
-    public void yesNoTest3(){
+    public void questionTest3(){
         //statement
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("es");
@@ -165,6 +192,24 @@ public class QuestionTest {
         output = realiser.realiseSentence(sentence);
         System.out.println(output);
         Assertions.assertEquals("Gibt es heute Fisch in der Mensa?", output);
+
+        //how question
+        sentence = nlgFactory.createClause();
+        subject = nlgFactory.createNounPhrase("es");
+        sentence.setSubject(subject);
+        verb = nlgFactory.createVerbPhrase("geben");
+        verb.addModifier("heute");
+        sentence.setVerb(verb);
+        object = nlgFactory.createNounPhrase("Fisch");
+        sentence.setObject(object);
+        preposition = nlgFactory.createPrepositionPhrase("in");
+        preposition.addComplement("der Mensa");
+        sentence.addComplement(preposition);
+
+        sentence.setFeature(Feature.INTERROGATIVE_TYPE, InterrogativeType.HOW);
+        output = realiser.realiseSentence(sentence);
+        System.out.println(output);
+        Assertions.assertEquals("Wie gibt es heute Fisch in der Mensa?", output);
 
         //question object
         sentence = nlgFactory.createClause();

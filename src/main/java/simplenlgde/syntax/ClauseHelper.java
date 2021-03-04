@@ -387,6 +387,9 @@ abstract class ClauseHelper {
 				case WHO_OBJECT:
 					realiseWhoWhatObject(phrase, parent, realisedElement, phraseFactory, verbElement);
 					break;
+				case HOW:
+					realiseHow(phrase, parent, realisedElement, phraseFactory, verbElement);
+					break;
 				default:
 					break;
 			}
@@ -431,6 +434,51 @@ abstract class ClauseHelper {
 		realiseVerb(phrase, parent, realisedElement, splitVerb, verbElement, false);
 	}
 
+
+	/**
+	 * Performs the realisation for HOW types of questions. The word how is added to the front of the sentence and the word order is changed.
+	 *
+	 *
+	 * @param phrase
+	 *            the <code>PhraseElement</code> representing this clause.
+	 * @param parent
+	 *            the parent <code>SyntaxProcessor</code> that will do the
+	 *            realisation of the complementiser.
+	 * @param realisedElement
+	 *            the current realisation of the clause.
+	 * @param phraseFactory
+	 * 	          the phrase factory to be used.
+	 * @param verbElement
+	 *            the <code>NLGElement</code> representing the verb phrase for
+	 *            this clause.
+	 * @return an <code>NLGElement</code> representing a subject that should
+	 *         split the verb
+	 */
+	private static void realiseHow(PhraseElement phrase,
+									 SyntaxProcessor parent,
+									 ListElement realisedElement,
+									 NLGFactory phraseFactory,
+									 NLGElement verbElement) {
+		NLGElement splitVerb = null;
+
+		//change word order
+		verbElement.setFeature(InternalFeature.POSTMODIFIERS, verbElement.getFeatureAsElementList(InternalFeature.COMPLEMENTS));
+		verbElement.setFeature(InternalFeature.COMPLEMENTS, phrase.getFeatureAsElementList(InternalFeature.SUBJECTS));
+
+		//add word how
+		NLGElement how = phraseFactory.createWord("wie",LexicalCategory.ADJECTIVE);
+		verbElement.setFeature(InternalFeature.PREMODIFIERS, how);
+
+		List<NLGElement> modifiers = verbElement.getFeatureAsElement(InternalFeature.HEAD).getFeatureAsElementList(InternalFeature.MODIFIERS);
+		verbElement.getFeatureAsElement(InternalFeature.HEAD).setFeature(InternalFeature.MODIFIERS,null);
+		for (NLGElement mod: modifiers) {
+			phrase.addComplement(mod);
+
+		}
+
+		realiseVerb(phrase, parent, realisedElement, splitVerb, verbElement, false);
+	}
+
 	/**
 	 * Performs the realisation for questions about the subject of a sentence.
 	 * The original subject is replaced by a question word.
@@ -447,8 +495,6 @@ abstract class ClauseHelper {
 	 * @param verbElement
 	 *            the <code>NLGElement</code> representing the verb phrase for
 	 *            this clause.
-	 * @param subjects
-	 *            the <code>List</code> of subjects in the clause.
 	 * @return an <code>NLGElement</code> representing a subject that should
 	 *         split the verb
 	 */
@@ -488,8 +534,6 @@ abstract class ClauseHelper {
 	 * @param verbElement
 	 *            the <code>NLGElement</code> representing the verb phrase for
 	 *            this clause.
-	 * @param subjects
-	 *            the <code>List</code> of subjects in the clause.
 	 * @return an <code>NLGElement</code> representing a subject that should
 	 *         split the verb
 	 */
