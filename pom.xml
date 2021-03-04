@@ -4,7 +4,7 @@
 
     <groupId>com.github.sebischair</groupId>
     <artifactId>SimpleNLG-DE</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>SimpleNLG-DE</name>
@@ -100,6 +100,7 @@
                     <target>7</target>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -125,6 +126,7 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
+            -->
         </plugins>
     </build>
 
