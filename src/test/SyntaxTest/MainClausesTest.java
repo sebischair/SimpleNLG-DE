@@ -1,6 +1,8 @@
-package test.SyntaxTest;
+package SyntaxTest;
 import org.junit.jupiter.api.Assertions;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -12,12 +14,14 @@ public class MainClausesTest {
     private NLGFactory nlgFactory;
     private Realiser realiser = null;
 
-    public MainClausesTest(Lexicon lexicon2, NLGFactory nlgFactory2, Realiser realiser2) {
-        this.lexicon = lexicon2;
-        this.nlgFactory = nlgFactory2;
-        this.realiser = realiser2;
+    @BeforeEach
+    public void setup() {
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
     }
 
+    @Test
     public void testMainClauses() {
         SPhraseSpec sentence1 = nlgFactory.createClause();
         NPPhraseSpec subject1 = nlgFactory.createNounPhrase("mary");
@@ -34,6 +38,7 @@ public class MainClausesTest {
         Assertions.assertEquals("Mary macht Hausaufgaben in der Küche.", output1);
     }
 
+    @Test
     public void testSeparableMainClauses() {
         SPhraseSpec sentence1 = nlgFactory.createClause();
         NPPhraseSpec subject1 = nlgFactory.createNounPhrase("mary");
@@ -50,6 +55,7 @@ public class MainClausesTest {
         Assertions.assertEquals("Mary arbeitet Hausaufgaben in der Küche ab.", output1);
     }
 
+    @Test
     public void testCompoundMainClausesComma() {
         SPhraseSpec sentence1 = nlgFactory.createClause();
         NPPhraseSpec subject1 = nlgFactory.createNounPhrase("der hund");
@@ -71,6 +77,7 @@ public class MainClausesTest {
         Assertions.assertEquals("Der Hund bellt, die Katze miaut.", output);
     }
 
+    @Test
     public void testCompoundMainClausesUnd() {
         SPhraseSpec sentence1 = nlgFactory.createClause();
         NPPhraseSpec subject1 = nlgFactory.createNounPhrase("der hund");

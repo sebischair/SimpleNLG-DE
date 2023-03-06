@@ -12,8 +12,8 @@
  * Contributor(s): Daniel Braun, Technical University of Munich.
  */
 
-package test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -27,12 +27,15 @@ public class QuestionTest {
     private NLGFactory nlgFactory;
     private Realiser realiser;
 
-    public QuestionTest(Lexicon lexicon, NLGFactory nlgFactory, Realiser realiser) {
-        this.lexicon = lexicon;
-        this.nlgFactory = nlgFactory;
-        this.realiser = realiser;
+    @BeforeEach
+    public void setup() {
+        System.out.println("RUN");
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
     }
 
+    @Test
     public void questionTest1(){
         //statement
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -104,6 +107,7 @@ public class QuestionTest {
         Assertions.assertEquals("Was verliert Klaus?", output);
     }
 
+    @Test
     public void questionTest2(){
         //statement
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -157,6 +161,7 @@ public class QuestionTest {
         Assertions.assertEquals("Was ist rot?", output);
     }
 
+    @Test
     public void questionTest3(){
         //statement
         SPhraseSpec sentence = nlgFactory.createClause();

@@ -1,7 +1,9 @@
-package test.SyntaxTest;
+package SyntaxTest;
 
 import org.junit.jupiter.api.Assertions;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -9,17 +11,18 @@ import simplenlgde.features.*;
 import simplenlgde.phrasespec.*;
 
 public class SubordinateClausesTest {
+    private Lexicon lexicon;
+    private NLGFactory nlgFactory;
+    private Realiser realiser = null;
 
-        private Lexicon lexicon;
-        private NLGFactory nlgFactory;
-        private Realiser realiser = null;
+    @BeforeEach
+    public void setup() {
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
+    }
 
-        public SubordinateClausesTest(Lexicon lexicon2, NLGFactory nlgFactory2, Realiser realiser2) {
-            this.lexicon = lexicon2;
-            this.nlgFactory = nlgFactory2;
-            this.realiser = realiser2;
-        }
-
+    @Test
     public void testTemporalSubordinates() {
         //System.out.println("\n---------------------------- Test temporal subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -43,6 +46,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint, während es regnet.", output1);
     }
 
+    @Test
     public void testCausalSubordinates() {
         //System.out.println("\n---------------------------- Test causal subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -66,6 +70,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint, weil es Sommer ist.", output1);
     }
 
+    @Test
     public void testConditionalSubordinates() {
         //System.out.println("\n---------------------------- Test conditional subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -90,6 +95,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint, wenn du brav bist.", output1);
     }
 
+    @Test
     public void testConsecutiveSubordinates() {
         //System.out.println("\n---------------------------- Test consecutive subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -115,6 +121,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint, sodass alle ins Schwitzen kommen.", output1);
     }
 
+    @Test
     public void testConcessiveSubordinates() {
         //System.out.println("\n---------------------------- Test conecssive subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -138,6 +145,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint, obwohl es regnet.", output1);
     }
 
+    @Test
     public void testModalSubordinates() {
         //System.out.println("\n---------------------------- Test modal subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -163,6 +171,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint, indem sie Kernfusion betreibt.", output1);
     }
 
+    @Test
     public void testComparativeSubordinates() {
         //System.out.println("\n---------------------------- Test comparative subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -189,6 +198,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint heller, als die Lampe brennt.", output1);
     }
 
+    @Test
     public void testFinalSubordinates() {
         //System.out.println("\n---------------------------- Test final subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -213,6 +223,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Die Sonne scheint, damit wir nicht frieren.", output1);
     }
 
+    @Test
     public void testAdversativeSubordinates() {
         //System.out.println("\n---------------------------- Test adversative subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -236,6 +247,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Der Hund bellt, wohingegen die Katze miaut.", output1);
     }
 
+    @Test
     public void testRelativeSubordinates() {
         //System.out.println("\n---------------------------- Test relativ subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -254,6 +266,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Der Hund, der bellt, ist dort drüben.", output1);
     }
 
+    @Test
     public void testDassSubordinates() {
         //System.out.println("\n---------------------------- Test dass subordinate clauses ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -278,6 +291,7 @@ public class SubordinateClausesTest {
         Assertions.assertEquals("Er sagt, dass er morgen kommt.", output1);
     }
 
+    @Test
     public void testSubordinatesSepVerb() {
         //System.out.println("\n---------------------------- Test subordinate clauses with separable verb ---------------------------\n");
         SPhraseSpec sentence1 = nlgFactory.createClause();

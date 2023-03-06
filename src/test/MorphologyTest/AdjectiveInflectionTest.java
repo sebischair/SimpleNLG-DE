@@ -1,5 +1,7 @@
-package test.MorphologyTest;
+package MorphologyTest;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -35,12 +37,14 @@ public class AdjectiveInflectionTest {
             "Welcher gute Schüler."};
 
 
-    public AdjectiveInflectionTest(Lexicon lexicon, NLGFactory nlgFactory, Realiser realiser) {
-        this.lexicon = lexicon;
-        this.nlgFactory = nlgFactory;
-        this.realiser = realiser;
+    @BeforeEach
+    public void setup() {
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
     }
 
+    @Test
     private void doAdjectiveInflection(String[] adjectives, Boolean comp) {
         for (String adjective : adjectives) {
             for (String articleNoun : articleNouns) {
@@ -74,16 +78,19 @@ public class AdjectiveInflectionTest {
         }
     }
 
+    @Test
     public void testRegularAdjectiveInflecion() {
         System.out.println("\n---------------------------- IRREGULAR ADJECTIVE INFLECTION ---------------------------\n");
         doAdjectiveInflection(regularAdjectives, false);
     }
 
+    @Test
     public void testIrregularAdjectiveInflecion() {
         System.out.println("\n---------------------------- IRREGULAR ADJECTIVE INFLECTION ---------------------------\n");
         doAdjectiveInflection(irregularAdjectives, false);
     }
 
+    @Test
     public void testAdjectiveInflecionSpecialWords() {
         //System.out.println("\n---------------------------- ADJECTIVE INFLECTION AFTER SPECIAL WORDS ---------------------------\n");
         for (int i = 0; i < adj_conj_special.length; i++) {
@@ -106,6 +113,7 @@ public class AdjectiveInflectionTest {
         Assertions.assertEquals("Alle guten Schüler.", output3);
     }
 
+    @Test
     public void testAdjComparative() {
         //System.out.println("\n---------------------------- Test adjective's comparative ---------------------------\n");
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -145,12 +153,14 @@ public class AdjectiveInflectionTest {
         Assertions.assertEquals("Die leisere Schülerin.", output3);
     }
 
+    @Test
     public void testIrregularAdjectivesComparative() {
         System.out.println("\n---------------------------- ADJECTIVE INFLECTION IN COMPARATIVE ---------------------------\n");
         doAdjectiveInflection(regularAdjectives, true);
         doAdjectiveInflection(irregularAdjectives, true);
     }
 
+    @Test
     public void testAdjSuperlative() {
         System.out.println("\n---------------------------- Test adjective's superlative ---------------------------\n");
         for (String adjective : irregularAdjectives) {

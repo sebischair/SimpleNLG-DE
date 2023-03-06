@@ -12,8 +12,8 @@
  * Contributor(s): Daniel Braun, Technical University of Munich.
  */
 
-package test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -26,13 +26,15 @@ public class SaToSTest {
     private Lexicon lexicon;
     private NLGFactory nlgFactory;
     private Realiser realiser;
-       
-    public SaToSTest(Lexicon lexicon, NLGFactory nlgFactory, Realiser realiser) {
-		this.lexicon = lexicon;
-		this.nlgFactory = nlgFactory;
-		this.realiser = realiser;
-	}
 
+    @BeforeEach
+    public void setup() {
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
+    }
+
+    @Test
 	public void testToS1() {
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("Betreiber");
@@ -52,6 +54,7 @@ public class SaToSTest {
         Assertions.assertEquals("Der Betreiber räumt vierzehn Tage Rückgaberecht ein.", output);
     }
 
+    @Test
     public void testToS2() {
         SPhraseSpec sentence = nlgFactory.createClause();
 
@@ -78,6 +81,7 @@ public class SaToSTest {
         Assertions.assertEquals("Kündigungen sind zulässig per Brief, E-Mail und Fax.", output);
     }
 
+    @Test
     public void testToS3() {
     	SPhraseSpec sentence = nlgFactory.createClause();
 
@@ -107,6 +111,7 @@ public class SaToSTest {
         Assertions.assertEquals("Der Betreiber gewährt ein Jahr Gewährleistung auf gebrauchte Gegenstände.", output);
     }
 
+    @Test
     public void testToS4() {
         SPhraseSpec sentence = nlgFactory.createClause();
 
@@ -136,6 +141,7 @@ public class SaToSTest {
         Assertions.assertEquals("Der Betreiber gewährt zwei Jahre Gewährleistung auf neue Gegenstände.", output);
     }
 
+    @Test
     public void testToS5() {
         SPhraseSpec sentence = nlgFactory.createClause();
 
@@ -156,6 +162,7 @@ public class SaToSTest {
         Assertions.assertEquals("Die Kündigungsfrist beträgt drei Monate.", output);
     }
 
+    @Test
     public void testToS6(){
         SPhraseSpec sentence = nlgFactory.createClause();
 
@@ -176,6 +183,7 @@ public class SaToSTest {
         Assertions.assertEquals("Der Betreiber schränkt gesetzwidrig das Rückgaberecht ein.", output);
     }
 
+    @Test
     public void testToS7() {
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("Betreiber");

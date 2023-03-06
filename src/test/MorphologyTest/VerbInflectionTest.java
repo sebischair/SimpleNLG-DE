@@ -1,5 +1,7 @@
-package test.MorphologyTest;
+package MorphologyTest;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -28,13 +30,15 @@ public class VerbInflectionTest {
     String[] modalVerbs = {"dürfen", "können", "mögen", "müssen", "sollen", "wollen"};
 
 
-    public VerbInflectionTest(Lexicon lexicon, NLGFactory nlgFactory, Realiser realiser) {
-        this.lexicon = lexicon;
-        this.nlgFactory = nlgFactory;
-        this.realiser = realiser;
+    @BeforeEach
+    public void setup() {
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
     }
 
 
+    @Test
     private void doInflection(String person, String regularVerb, Tense tense, Boolean progressive, Boolean passive) {
         // help method to create inflected form
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -54,6 +58,7 @@ public class VerbInflectionTest {
         sentenceCounter += 1;
     }
 
+    @Test
     private void doInflectionSiePlural(String regularVerb, Tense tense, Boolean progressive, Boolean passive) {
         // help method to create inflected form for "sie" in plural
         SPhraseSpec sentence2 = nlgFactory.createClause();
@@ -74,6 +79,7 @@ public class VerbInflectionTest {
         sentenceCounter += 1;
     }
 
+    @Test
     public void testregularVerbInflection() {
         System.out.println("\n---------------------------- Test regular verb inflection ---------------------------\n");
         int loop = 0;
@@ -87,6 +93,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflection() {
         System.out.println("\n---------------------------- Test irregular verb inflection ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -97,6 +104,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflection() {
         System.out.println("\n---------------------------- Test separable verb inflection ---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -107,6 +115,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionPassive() {
         System.out.println("\n---------------------------- Test regular verb inflection passive ---------------------------\n");
         int loop = 0;
@@ -120,6 +129,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionPassive() {
         System.out.println("\n---------------------------- Test irregular verb inflection passive ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -130,6 +140,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflectionPassive() {
         System.out.println("\n---------------------------- Test separable verb inflection passive ---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -140,6 +151,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionPassiveProg() {
         System.out.println("\n---------------------------- Test regular verb inflection passive progressive ---------------------------\n");
         int loop = 0;
@@ -153,6 +165,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionPassiveProg() {
         System.out.println("\n---------------------------- Test irregular verb inflection passive progressive ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -163,6 +176,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflectionPassiveProg() {
         System.out.println("\n---------------------------- Test separable verb inflection passive progressive ---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -173,6 +187,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionPassivePret() {
         System.out.println("\n---------------------------- Test regular verb inflection passive past ---------------------------\n");
         int loop = 0;
@@ -186,6 +201,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionPassivePret() {
         System.out.println("\n---------------------------- Test irregular verb inflection passive past ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -196,6 +212,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflectionPassivePret() {
         System.out.println("\n---------------------------- Test separable verb inflection passive past---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -206,6 +223,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionPreterite() {
         System.out.println("\n---------------------------- Test regular verb inflection in preterite ---------------------------\n");
         for (String regularVerb : regularVerbs) {
@@ -216,6 +234,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionPreterite() {
         System.out.println("\n---------------------------- Test irregular verb inflection in preterite ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -226,6 +245,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflectionPreterite() {
         System.out.println("\n---------------------------- Test separable verb inflection in preterite ---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -236,6 +256,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionPerfect() {
         System.out.println("\n---------------------------- Test regular verb inflection in perfect ---------------------------\n");
         for (String regularVerb : regularVerbs) {
@@ -246,6 +267,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionPerfect() {
         System.out.println("\n---------------------------- Test irregular verb inflection in perfect ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -256,6 +278,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflectionPerfect() {
         System.out.println("\n---------------------------- Test separable verb inflection in perfect ---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -266,6 +289,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionPerfectProg() {
         System.out.println("\n---------------------------- Test regular verb inflection in perfect progressive ---------------------------\n");
         for (String regularVerb : regularVerbs) {
@@ -276,6 +300,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionPerfectProg() {
         System.out.println("\n---------------------------- Test irregular verb inflection in perfect progressive ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -286,6 +311,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflectionPerfectPro() {
         System.out.println("\n---------------------------- Test separable verb inflection in perfect progressive ---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -296,6 +322,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionFuture() {
         System.out.println("\n---------------------------- Test regular verb inflection in future ---------------------------\n");
         for (String regularVerb : regularVerbs) {
@@ -306,6 +333,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionFuture() {
         System.out.println("\n---------------------------- Test irregular verb inflection in future ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -316,6 +344,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void separableVerbInflectionFuture() {
         System.out.println("\n---------------------------- Test separable verb inflection in future ---------------------------\n");
         for (String irrregularVerb : separableVerbs) {
@@ -326,6 +355,7 @@ public class VerbInflectionTest {
         }
     }
 
+    @Test
     public void testModalVerbInflection() {
         System.out.println("\n---------------------------- Test modal verbs present ---------------------------\n");
         int loop = 0;

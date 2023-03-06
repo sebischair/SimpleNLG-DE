@@ -1,5 +1,7 @@
-package test.MorphologyTest;
+package MorphologyTest;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -76,12 +78,14 @@ public class NounInflectionTest {
             "Aktien der Argentinischen Republik."};
 
 
-    public NounInflectionTest(Lexicon lexicon, NLGFactory nlgFactory, Realiser realiser) {
-        this.lexicon = lexicon;
-        this.nlgFactory = nlgFactory;
-        this.realiser = realiser;
+    @BeforeEach
+    public void setup() {
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
     }
 
+    @Test
     private void doNounInflection(String[] nouns, Boolean testPlural) {
         for (String noun : nouns) {
                 for (DiscourseFunction disc : cases) {
@@ -103,28 +107,33 @@ public class NounInflectionTest {
         }
     }
 
+    @Test
     public void testRegularNounInflecionDir() {
         System.out.println("\n---------------------------- Regular noun inflection with direct article ---------------------------\n");
         doNounInflection(regularNounsDirect, true);
     }
 
+    @Test
     public void testIrregularNounInflecionDir() {
         System.out.println("\n---------------------------- Irregular noun inflection with direct article ---------------------------\n");
         doNounInflection(irregularNounsDirect, true);
     }
 
+    @Test
     public void testRegularNounInflecionIndir() {
         System.out.println("\n---------------------------- Regular noun inflection with indirect article ---------------------------\n");
         // no plural for indirect article
         doNounInflection(regularNounsIndirect, false);
     }
 
+    @Test
     public void testIrregularNounInflecionIndir() {
         System.out.println("\n---------------------------- Irregular noun inflection with indirect article ---------------------------\n");
         // no plural for indirect article
         doNounInflection(irregularNounsIndirect, false);
     }
 
+    @Test
     public void testCompoundWordInflection() {
         //System.out.println("\n---------------------------- Test inflection of compound words ---------------------------\n");
         for (int i = 0; i < nouns_compound.length; i++) {

@@ -1,5 +1,5 @@
-package test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -74,13 +74,15 @@ public class RealiserTest {
             "Assistenten", "Menschen", "Herren", "Frauen", "Eltern", "Kinder", "Löffel", "Niederlande", "USA"};
 
 
-    public RealiserTest(Lexicon lexicon2, NLGFactory nlgFactory2, Realiser realiser2) {
+    @BeforeEach
+    public void setup() {
+        System.out.println("RUN");
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);
-
     }
 
+    @Test
     public void testPluralizationLexicon() {
         //Sentence1
         SPhraseSpec sentence1 = nlgFactory.createClause();
@@ -160,6 +162,7 @@ public class RealiserTest {
         Assertions.assertEquals("Die Maßnahme steigert die Kurse.", output6);
     }
 
+    @Test
     public void testregularVerbInflection() {
         //System.out.println("\n---------------------------- Test regular verb inflection ---------------------------\n");
         int loop = 0;
@@ -186,6 +189,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflection() {
         System.out.println("\n---------------------------- Test irregular verb inflection ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -231,6 +235,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testregularVerbInflectionPreterite() {
         System.out.println("\n---------------------------- Test regular verb inflection in preterite ---------------------------\n");
         for (String regularVerb : regularVerbs) {
@@ -258,6 +263,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testirregularVerbInflectionPreterite() {
         System.out.println("\n---------------------------- Test irregular verb inflection in preterite ---------------------------\n");
         for (String irrregularVerb : irregularVerbs) {
@@ -283,6 +289,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testAdjectiveArticleInflecion() {
         System.out.println("\n---------------------------- ADJECTIVE & ARTICLE INFLECTION ---------------------------\n");
         System.out.println("NOMINATIVE & DATIVE\n");
@@ -457,7 +464,7 @@ public class RealiserTest {
     }
 
 
-
+    @Test
     public void testCommaRules() {
         //System.out.println("\n---------------------------- Test comma placement with postposed additions ---------------------------\n");
         SPhraseSpec sentence3 = nlgFactory.createClause();
@@ -489,6 +496,7 @@ public class RealiserTest {
         Assertions.assertEquals("BMW, ein Unternehmen aus dem Bereich Automobilbau, IBM, ein Unternehmen aus dem Bereich IT, sowie Siemens, ein Technologiekonzern, expandieren.", output3);
     }
 
+    @Test
     public void testGenitiveNouns() {
         //System.out.println("\n---------------------------- Test genitive inflection of nouns ---------------------------\n");
         for (int i = 0; i < nouns.length; i++) {
@@ -499,6 +507,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testDativeNouns() {
         //System.out.println("\n---------------------------- Test dative inflection of nouns ---------------------------\n");
         for (int i = 0; i < nouns.length; i++) {
@@ -512,6 +521,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testAccusativeNouns() {
         //System.out.println("\n---------------------------- Test accusative inflection of nouns ---------------------------\n");
         for (int i = 0; i < nouns.length; i++) {
@@ -528,6 +538,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testModifiers() {
         //System.out.println("\n---------------------------- Test placement of modifiers ---------------------------\n");
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -602,6 +613,7 @@ public class RealiserTest {
         Assertions.assertEquals("Der Zug fährt früher ab als der Bus.", output6);
     }
 
+    @Test
     public void separableVerbsPositioning() {
         //System.out.println("\n---------------------------- TEST POSITIONING OF SEPARABLE VERBS ---------------------------\n");
 
@@ -688,6 +700,7 @@ public class RealiserTest {
         Assertions.assertEquals("Morgen schließt Bob das rote Fahrrad schnell ab.", output6);
     }
 
+    @Test
     public void basicSyntaxTest() {
         //System.out.println("\n---------------------------- TEST SYNTAX ---------------------------\n");
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -725,6 +738,7 @@ public class RealiserTest {
         Assertions.assertEquals("Der wertvolle Fonds gehört dem großen Aktionär.", output1);
     }
 
+    @Test
     public void testPassivePresVerbInflection() {
         //System.out.println("\n---------------------------- Test passive present verb inflection ---------------------------\n");
         int loop = 0;
@@ -753,6 +767,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testPassiveProgressivePresVerbInflection() {
         //System.out.println("\n---------------------------- Test passive progressive present verb inflection ---------------------------\n");
         int loop = 0;
@@ -783,6 +798,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testPassivePretVerbInflection() {
         //System.out.println("\n---------------------------- Test passive preterite verb inflection ---------------------------\n");
         int loop = 0;
@@ -813,6 +829,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void adjAdvTest() {
         //System.out.println("\n---------------------------- TEST ADJECTIVES VS. ADVERBS ---------------------------\n");
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -843,6 +860,7 @@ public class RealiserTest {
         Assertions.assertEquals("Das schwer beladene Auto.", output2);
     }
 
+    @Test
     public void adjEnumerationTest() {
         //System.out.println("\n---------------------------- TEST ENUMERATION OF ADJECTIVES ---------------------------\n");
         NPPhraseSpec subject2 = nlgFactory.createNounPhrase("unternehmen");
@@ -866,6 +884,7 @@ public class RealiserTest {
         Assertions.assertEquals("deutsche und US-amerikanische Unternehmen", output3);
     }
 
+    @Test
     public void testPerfectVerbInflection() {
         //System.out.println("\n---------------------------- Test perfect verb inflection ---------------------------\n");
 
@@ -895,6 +914,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testPerfectProgressiveVerbInflection() {
         System.out.println("\n---------------------------- Test perfect progressive verb inflection ---------------------------\n");
 
@@ -927,6 +947,7 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testFutureVerbInflection() {
         //System.out.println("\n---------------------------- Test future verb inflection ---------------------------\n");
         int loop = 0;
@@ -955,10 +976,12 @@ public class RealiserTest {
         }
     }
 
+    @Test
     public void testSpecialCharacters() {
         NLGElement test = nlgFactory.createNounPhrase("Immobilien & Bau");
     }
 
+    @Test
     public void testVerbPreModifiers() {
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("Nachhause");
@@ -970,6 +993,7 @@ public class RealiserTest {
         Assertions.assertEquals("Nachhause zu laufen.", output);
     }
 
+    @Test
     public void testPostModsVsComplements() {
         //System.out.println("\n---------------------------- Test the positioning of PostModifiers vs. Complements ---------------------------\n");
         SPhraseSpec sentence = nlgFactory.createClause();
@@ -996,6 +1020,7 @@ public class RealiserTest {
         //System.out.println(output2);
     }
 
+    @Test
     public void testModifierPositioning() {
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("er");
@@ -1030,7 +1055,8 @@ public class RealiserTest {
         String output3 = realiser.realiseSentence(sentence3);
         System.out.println(output3);
     }
-    
+
+    @Test
     public void testPerfectWordOrder() {
         System.out.println("\n---------------------------- Test perfect verb inflection ---------------------------\n");
                 SPhraseSpec sentence = nlgFactory.createClause();
@@ -1059,7 +1085,8 @@ public class RealiserTest {
                 //Assertions.assertEquals("Er wird sie mögen.", output);
 
     }
-    
+
+    @Test
     public void testApposition() {
         //System.out.println("\n---------------------------- Test commas with appositions ---------------------------\n");
                 SPhraseSpec sentence = nlgFactory.createClause();
@@ -1077,7 +1104,8 @@ public class RealiserTest {
                 String output = realiser.realiseSentence(sentence);
                 Assertions.assertEquals("Die überproportionalen Positionen in Bank of China (HK), einem Titel mit Sitz in Hongkong, und American International Group (AIG).", output);
     }
-    
+
+    @Test
     public void testUserSetGender() {
         //System.out.println("\n---------------------------- Test user set gender ---------------------------\n");
     	SPhraseSpec sentence = nlgFactory.createClause();
@@ -1089,6 +1117,7 @@ public class RealiserTest {
         Assertions.assertEquals("Ein kleines Fußballmatch.", output);
     }
 
+    @Test
     public void helpTest() {
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("du");

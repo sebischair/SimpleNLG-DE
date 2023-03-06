@@ -1,5 +1,5 @@
-package test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
@@ -12,12 +12,14 @@ public class SyntaxTreeTest {
     private NLGFactory nlgFactory;
     private Realiser realiser;
 
-    public SyntaxTreeTest(Lexicon lexicon, NLGFactory nlgFactory, Realiser realiser) {
-        this.lexicon = lexicon;
-        this.nlgFactory = nlgFactory;
-        this.realiser = realiser;
+    @BeforeEach
+    public void setup() {
+        lexicon = Lexicon.getDefaultLexicon();
+        nlgFactory = new NLGFactory(lexicon);
+        realiser = new Realiser(lexicon);
     }
 
+    @Test
     public void buildSyntaxTree() {
         SPhraseSpec sentence = nlgFactory.createClause();
         NPPhraseSpec subject = nlgFactory.createNounPhrase("Otto");
