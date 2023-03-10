@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Assertions;
 
 public class RealiserTest {
 
-    private Lexicon lexicon;
-    private NLGFactory nlgFactory;
-    private Realiser realiser = null;
+    private static Lexicon lexicon;
+    private static NLGFactory nlgFactory;
+    private static Realiser realiser = null;
 
     String[] persons = {"Ich", "Du", "Er", "Wir", "Ihr"};
 
@@ -63,20 +63,19 @@ public class RealiserTest {
             "der assistent", "der mensch", "der herr", "die frau", "die eltern", "das kind", "der löffel", "die niederlande", "die USA"};
     String[] nouns_gen_correct = {"Des Fonds.", "Des Vaters.", "Des Einflusses.", "Des Fußes.", "Des Indexes.",
             "Des Suffixes.", "Des Pilzes.", "Des Ergebnisses.", "Des Jahres.", "Des Geschenkes.", "Des Jungen.",
-            "Des Assistenten.", "Des Menschen.", "Des Herren.", "Der Frau.", "Der Eltern.", "Des Kindes.",
+            "Des Assistenten.", "Des Menschen.", "Des Herrn.", "Der Frau.", "Der Eltern.", "Des Kindes.",
             "Des Löffels.", "Der Niederlande.", "Der USA."};
     String[] nouns_dat_correct = {"Aus dem Fonds.", "Aus dem Vater.", "Aus dem Einfluss.", "Aus dem Fuß.",
             "Aus dem Index.", "Aus dem Suffix.", "Aus dem Pilz.", "Aus dem Ergebnis.", "Aus dem Jahr.",
-            "Aus dem Geschenk.", "Aus dem Jungen.", "Aus dem Assistenten.", "Aus dem Menschen.", "Aus dem Herren.",
+            "Aus dem Geschenk.", "Aus dem Jungen.", "Aus dem Assistenten.", "Aus dem Menschen.", "Aus dem Herrn.",
             "Aus der Frau.", "Aus den Eltern.", "Aus dem Kind.", "Aus dem Löffel.", "Aus den Niederlanden.",
             "Aus den USA."};
     String[] nouns_acc_correct = {"Fonds", "Väter", "Einflüsse", "Füße", "Indizes", "Suffixe", "Pilze", "Ergebnisse", "Jahre", "Geschenke", "Jungen",
             "Assistenten", "Menschen", "Herren", "Frauen", "Eltern", "Kinder", "Löffel", "Niederlande", "USA"};
 
 
-    @BeforeEach
-    public void setup() {
-        System.out.println("RUN");
+    @BeforeAll
+    public static void setup() {
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);
@@ -955,6 +954,9 @@ public class RealiserTest {
             for (int j = 0; j < persons.length; j++) {
                 SPhraseSpec sentence = nlgFactory.createClause();
                 NPPhraseSpec subject = nlgFactory.createNounPhrase(persons[j]);
+                if(persons[j].equals("ihr")) {
+                    subject.setPlural(true);
+                }
                 sentence.setSubject(subject);
                 VPPhraseSpec verb = nlgFactory.createVerbPhrase(regularVerbs[i]);
                 sentence.setVerb(verb);

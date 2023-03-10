@@ -2,7 +2,7 @@ package SyntaxTest;
 
 import org.junit.jupiter.api.Assertions;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
@@ -11,12 +11,12 @@ import simplenlgde.features.*;
 import simplenlgde.phrasespec.*;
 
 public class SubordinateClausesTest {
-    private Lexicon lexicon;
-    private NLGFactory nlgFactory;
-    private Realiser realiser = null;
+    private static Lexicon lexicon;
+    private static NLGFactory nlgFactory;
+    private static Realiser realiser = null;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);

@@ -12,7 +12,7 @@
  * Contributor(s): Daniel Braun, Technical University of Munich.
  */
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
@@ -23,13 +23,12 @@ import simplenlgde.phrasespec.*;
 import org.junit.jupiter.api.Assertions;
 
 public class QuestionTest {
-    private Lexicon lexicon;
-    private NLGFactory nlgFactory;
-    private Realiser realiser;
+    private static Lexicon lexicon;
+    private static NLGFactory nlgFactory;
+    private static Realiser realiser;
 
-    @BeforeEach
-    public void setup() {
-        System.out.println("RUN");
+    @BeforeAll
+    public static void setup() {
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);

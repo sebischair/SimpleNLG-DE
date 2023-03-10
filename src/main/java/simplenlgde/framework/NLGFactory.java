@@ -78,9 +78,9 @@ public class NLGFactory {
 	private static final List<String> SECOND_PRONOUNS = Arrays.asList("du", "ihr");
 
 	/**
-	 * The list of plural German pronouns.
+	 * The list of plural German pronouns. "sie" can be both plural and singular
 	 */
-	private static final List<String> PLURAL_PRONOUNS = Arrays.asList("wir", "ihr", "sie", "alle");
+	private static final List<String> PLURAL_PRONOUNS = Arrays.asList("wir", "ihr", "alle");
 
 	/**
 	 * The list of German indefinite pronouns, which have to be conjugated.

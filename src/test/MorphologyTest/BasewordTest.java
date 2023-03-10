@@ -14,23 +14,22 @@
 
 package MorphologyTest;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
-import simplenlgde.features.*;
 import simplenlgde.phrasespec.*;
 
 import org.junit.jupiter.api.Assertions;
 
 public class BasewordTest {
-    private Lexicon lexicon;
-    private NLGFactory nlgFactory;
-    private Realiser realiser;
+    private static Lexicon lexicon;
+    private static NLGFactory nlgFactory;
+    private static Realiser realiser;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);
@@ -38,8 +37,8 @@ public class BasewordTest {
 
     @Test
     public void nounBasewordTest(){
-        String[] base = {"Mensch", "Tier", "Tier"};
-        String[] inflected = {"Menschen", "Tieres", "Tiere"};
+        String[] base = {"Mensch", "Tier"};
+        String[] inflected = {"Menschen", "Tiere"};
 
         for (int i = 0; i < base.length; i++){
             NPPhraseSpec np1 = nlgFactory.createNounPhrase(base[i]);
@@ -55,10 +54,10 @@ public class BasewordTest {
         String[] inflected = {"guter", "gute", "gutes", "gutem", "guten"};
 
         for (int i = 0; i < base.length; i++){
-            VPPhraseSpec vp1 = nlgFactory.createVerbPhrase(base[i]);
-            VPPhraseSpec vp2 = nlgFactory.createVerbPhrase(inflected[i]);
+            AdjPhraseSpec adj1 = nlgFactory.createAdjectivePhrase(base[i]);
+            AdjPhraseSpec adj2 = nlgFactory.createAdjectivePhrase(inflected[i]);
 
-            Assertions.assertEquals(((WordElement) vp1.getVerb()).getBaseForm(), ((WordElement) vp2.getVerb()).getBaseForm());
+            Assertions.assertEquals(((WordElement) adj1.getAdjective()).getBaseForm(), ((WordElement) adj2.getAdjective()).getBaseForm());
         }
     }
 

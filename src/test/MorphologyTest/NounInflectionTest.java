@@ -1,6 +1,6 @@
 package MorphologyTest;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Assertions;
 
 public class NounInflectionTest {
 
-    private Lexicon lexicon;
-    private NLGFactory nlgFactory;
-    private Realiser realiser = null;
+    private static Lexicon lexicon;
+    private static NLGFactory nlgFactory;
+    private static Realiser realiser = null;
 
     int sentenceCounter = 0;
 
@@ -78,8 +78,8 @@ public class NounInflectionTest {
             "Aktien der Argentinischen Republik."};
 
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);
@@ -139,6 +139,7 @@ public class NounInflectionTest {
         for (int i = 0; i < nouns_compound.length; i++) {
             SPhraseSpec sentence = nlgFactory.createClause();
             NPPhraseSpec subject = nlgFactory.createNounPhrase("Aktien");
+            subject.setPlural(true);
             subject.addComplement("aus");
             NPPhraseSpec noun = nlgFactory.createNounPhrase(nouns_compound[i]);
             sentence.setSubject(subject);
@@ -160,6 +161,7 @@ public class NounInflectionTest {
 
             SPhraseSpec sentence3 = nlgFactory.createClause();
             NPPhraseSpec subject3 = nlgFactory.createNounPhrase("Aktien");
+            subject3.setPlural(true);
             NPPhraseSpec noun3 = nlgFactory.createNounPhrase(nouns_compound[i]);
             noun3.setFeature(InternalFeature.CASE, DiscourseFunction.GENITIVE);
             subject3.addComplement(noun3);

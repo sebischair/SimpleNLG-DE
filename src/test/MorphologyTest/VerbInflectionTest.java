@@ -1,6 +1,6 @@
 package MorphologyTest;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
@@ -10,9 +10,9 @@ import simplenlgde.features.*;
 
 public class VerbInflectionTest {
 
-    private Lexicon lexicon;
-    private NLGFactory nlgFactory;
-    private Realiser realiser = null;
+    private static Lexicon lexicon;
+    private static NLGFactory nlgFactory;
+    private static Realiser realiser = null;
 
     int sentenceCounter = 0;
 
@@ -30,8 +30,8 @@ public class VerbInflectionTest {
     String[] modalVerbs = {"dürfen", "können", "mögen", "müssen", "sollen", "wollen"};
 
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);

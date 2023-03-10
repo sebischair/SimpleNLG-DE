@@ -1,7 +1,7 @@
 package SyntaxTest;
 import org.junit.jupiter.api.Assertions;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
@@ -10,12 +10,12 @@ import simplenlgde.features.*;
 import simplenlgde.phrasespec.*;
 
 public class MainClausesTest {
-    private Lexicon lexicon;
-    private NLGFactory nlgFactory;
-    private Realiser realiser = null;
+    private static Lexicon lexicon;
+    private static NLGFactory nlgFactory;
+    private static Realiser realiser = null;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         lexicon = Lexicon.getDefaultLexicon();
         nlgFactory = new NLGFactory(lexicon);
         realiser = new Realiser(lexicon);
@@ -27,6 +27,7 @@ public class MainClausesTest {
         NPPhraseSpec subject1 = nlgFactory.createNounPhrase("mary");
         VPPhraseSpec verb1 = nlgFactory.createVerbPhrase("machen");
         NPPhraseSpec object1_1 = nlgFactory.createNounPhrase("hausaufgaben");
+        object1_1.setPlural(true);
         NPPhraseSpec object1_2 = nlgFactory.createNounPhrase("in der Küche");
 
         sentence1.setSubject(subject1);
@@ -44,6 +45,7 @@ public class MainClausesTest {
         NPPhraseSpec subject1 = nlgFactory.createNounPhrase("mary");
         VPPhraseSpec verb1 = nlgFactory.createVerbPhrase("abarbeiten");
         NPPhraseSpec object1_1 = nlgFactory.createNounPhrase("hausaufgaben");
+        object1_1.setPlural(true);
         NPPhraseSpec object1_2 = nlgFactory.createNounPhrase("in der Küche");
 
         sentence1.setSubject(subject1);
