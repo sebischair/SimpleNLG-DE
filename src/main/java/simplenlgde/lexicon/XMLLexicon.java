@@ -22,18 +22,14 @@
 
 package simplenlgde.lexicon;
 
+import simplenlgde.features.*;
 import simplenlgde.framework.*;
 
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -42,6 +38,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import simplenlgde.morphology.MorphologyProcessor;
 
 
 /**
@@ -232,6 +229,100 @@ public class XMLLexicon extends Lexicon {
                         + " occurs more than once");
             indexByID.put(id, word);
         }
+
+        // now index by variant
+        for(String variant : getVariants(word)) {
+            updateIndex(word, variant, indexByVariant);
+        }
+    }
+
+    /**
+     * generates all morph variants of a word
+     *
+     * @param word
+     * @return
+     */
+    protected Set<String> getVariants(WordElement word) {
+        Set<String> variants = new HashSet<String>();
+        variants.add(word.getBaseForm());
+        ElementCategory category = word.getCategory();
+        if (category instanceof LexicalCategory) {
+            MorphologyProcessor morph = new MorphologyProcessor();
+            InflectedWordElement inflected = new InflectedWordElement(word);
+
+            switch ((LexicalCategory) category) {
+                case NOUN:
+                    for(NumberAgreement number: NumberAgreement.values()) {
+                        for(DiscourseFunction discourseFunction: DiscourseFunction.values()) {
+                            inflected.setFeature(Feature.NUMBER, number);
+                            inflected.setFeature(InternalFeature.CASE, discourseFunction);
+
+                            try {
+                                String realisation = morph.realise(inflected).getRealisation();
+                                if(!variants.contains(realisation)){
+                                    variants.add(realisation);
+                                }
+                            } catch (Exception e) {
+                                //Lexicon entry is not complete
+                            }
+                        }
+                    }
+                    break;
+
+                case VERB:
+                    for (Tense tense: Tense.values()) {
+                        for(NumberAgreement number: NumberAgreement.values()){
+                            for(Person person: Person.values()) {
+                                inflected.setFeature(Feature.TENSE, tense);
+                                inflected.setFeature(Feature.NUMBER, number);
+                                inflected.setFeature(Feature.PERSON, person);
+
+                                try {
+                                    String realisation = morph.realise(inflected).getRealisation();
+                                    if(!variants.contains(realisation)){
+                                        variants.add(realisation);
+                                    }
+                                } catch (Exception e) {
+                                    //Lexicon entry is not complete
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case ADJECTIVE:
+                    Boolean[] b = {true, false};
+                    inflected.setFeature(InternalFeature.DISCOURSE_FUNCTION, DiscourseFunction.MODIFIER);
+
+                    for(NumberAgreement number: NumberAgreement.values()) {
+                        for(DiscourseFunction discourseFunction: DiscourseFunction.values()) {
+                            for(Gender gender: Gender.values()) {
+                                for(Boolean superlative: b) {
+                                    for(Boolean comparative: b) {
+                                        inflected.setFeature(Feature.NUMBER, number);
+                                        inflected.setFeature(InternalFeature.CASE, discourseFunction);
+                                        inflected.setFeature(Feature.IS_SUPERLATIVE, superlative);
+                                        inflected.setFeature(Feature.IS_COMPARATIVE, comparative);
+                                        inflected.setFeature(LexicalFeature.GENDER, gender);
+
+                                        try {
+                                            String realisation = morph.realise(inflected).getRealisation();
+                                            if (!variants.contains(realisation)) {
+                                                variants.add(realisation);
+                                            }
+                                        } catch (Exception e) {
+                                            //Lexicon entry is not complete
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return variants;
     }
 
     /**

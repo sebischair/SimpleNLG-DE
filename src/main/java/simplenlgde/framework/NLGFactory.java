@@ -468,6 +468,7 @@ public class NLGFactory {
 		} else if (word instanceof String && this.lexicon != null) {
 			wordElement = lexicon.lookupWord((String) word, category);
 			if (PRONOUNS.contains(((String) word).toLowerCase())) {
+				wordElement = new WordElement(((String) word).toLowerCase(), LexicalCategory.PRONOUN); //ignore pronouns in lexicon
 				setPronounFeatures(wordElement, (String) word);
 			}
 			if (MERGED_ARTICLES_DEF.contains(word.toString().toLowerCase())) {
