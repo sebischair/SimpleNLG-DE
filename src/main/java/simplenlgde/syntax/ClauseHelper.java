@@ -56,8 +56,7 @@ abstract class ClauseHelper {
 		ListElement realisedElement = null;
 		NLGElement splitVerb = null;
 		boolean interrogObj = false;
-		Lexicon lexicon = Lexicon.getDefaultLexicon();
-		NLGFactory nlgFactory = new NLGFactory(lexicon);
+		NLGFactory nlgFactory = phrase.getFactory();
 
 		if(phrase != null) {
 			realisedElement = new ListElement();
