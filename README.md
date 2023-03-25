@@ -4,7 +4,7 @@ SimpleNLG is a simple Java API designed to facilitate the generation of Natural 
 As the authors of the original, English SimpleNLG library state, "SimpleNLG is intended to function as a ["realisation engine"](https://en.wikipedia.org/wiki/Realization_(linguistics)) for [Natural Language Generation](https://en.wikipedia.org/wiki/Natural-language_generation) architectures [...]".
 
 ## Current Release (German)
-The current release of SimpleNLG-DE is V1.1.
+The current release of SimpleNLG-DE is V1.1.1.
 
 ## Getting Started
 For instructions on how to use SimpleNLG German, please refer to the [tutorial](https://github.com/sebischair/SimpleNLG-DE/wiki).
@@ -14,7 +14,7 @@ The quickest way to use SimpleNLG is to add it as a dependency to your maven pom
 <dependency>
   <groupId>com.github.sebischair</groupId>
   <artifactId>SimpleNLG-DE</artifactId>
-  <version>1.1</version>
+  <version>1.1.1</version>
 </dependency>
 ```
 

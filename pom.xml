@@ -4,7 +4,7 @@
 
     <groupId>com.github.sebischair</groupId>
     <artifactId>SimpleNLG-DE</artifactId>
-    <version>1.1</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
 
     <name>SimpleNLG-DE</name>
