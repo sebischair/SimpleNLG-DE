@@ -1,4 +1,4 @@
-package MorphologyTest;
+package simplenlgde.morphology;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

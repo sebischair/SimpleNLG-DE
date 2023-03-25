@@ -12,16 +12,15 @@
  * Contributor(s): Daniel Braun, Technical University of Munich.
  */
 
-package MorphologyTest;
+package simplenlgde.morphology;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
 import simplenlgde.phrasespec.*;
-
-import org.junit.jupiter.api.Assertions;
 
 public class BasewordTest {
     private static Lexicon lexicon;

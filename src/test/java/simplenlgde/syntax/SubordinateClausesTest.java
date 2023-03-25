@@ -1,7 +1,6 @@
-package SyntaxTest;
+package simplenlgde.syntax;
 
 import org.junit.jupiter.api.Assertions;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;

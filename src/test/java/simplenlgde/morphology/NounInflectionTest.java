@@ -1,14 +1,13 @@
-package MorphologyTest;
+package simplenlgde.morphology;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import simplenlgde.framework.*;
 import simplenlgde.lexicon.Lexicon;
 import simplenlgde.realiser.Realiser;
 import simplenlgde.features.*;
 import simplenlgde.phrasespec.*;
-
-import org.junit.jupiter.api.Assertions;
 
 public class NounInflectionTest {
 

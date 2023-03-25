@@ -1,3 +1,5 @@
+package simplenlgde;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simplenlgde.framework.*;
